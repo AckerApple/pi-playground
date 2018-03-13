@@ -17,7 +17,7 @@ function ledColorSet(r_val, g_val, b_val){
 	wpi.softPwmWrite(LedPinBlue,  b_val);
 }
 
-function promiseDelay(delay){
+function ()=>promiseDelay(delay){
 	return new Promise((res,rej)=>{
 		setTimeout(()=>res(), delay)
 	})
@@ -54,27 +54,27 @@ function main(){
 			console.log("Red\n");
 			ledColorSet(0xff,0x00,0x00);   //red	
 		})
-		.then( promiseDelay(500) )
+		.then( ()=>promiseDelay(500) )
 		.then(()=>{
 			console.log("Green\n");
 			ledColorSet(0x00,0xff,0x00);   //green
 		})
-		.then( promiseDelay(500) )
+		.then( ()=>promiseDelay(500) )
 		.then(()=>{
 			console.log("Blue\n");
 			ledColorSet(0x00,0x00,0xff);   //blue
 		})
-		.then( promiseDelay(500) )
+		.then( ()=>promiseDelay(500) )
 		.then(()=>{
 			console.log("Yellow\n");
 			ledColorSet(0xff,0xff,0x00);   //yellow
 		})
-		.then( promiseDelay(500) )
+		.then( ()=>promiseDelay(500) )
 		.then(()=>{
 			console.log("Purple\n");
 			ledColorSet(0xff,0x00,0xff);   //purple
 		})
-		.then( promiseDelay(500) )
+		.then( ()=>promiseDelay(500) )
 		.then(()=>{
 			console.log("Cyan\n");
 			ledColorSet(0xc0,0xff,0x3e);   //cyan
