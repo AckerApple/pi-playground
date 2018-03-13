@@ -48,7 +48,7 @@ function main(){
 	console.log("\n");
 	console.log("\n");
 
-	createInterval(()=>{
+	setInterval(()=>{
 		Promise.resolve()
 		.then(()=>{
 			console.log("Red\n");
