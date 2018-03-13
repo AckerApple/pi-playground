@@ -1,0 +1,19 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "01_blinkLed.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "open": "0.0.5",
+    "wiring-pi": "^2.2.1",
+    "wiringpi-node": "^2.4.4"
+  },
+  "devDependencies": {
+    "say": "^0.14.0"
+  }
+}
