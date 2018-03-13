@@ -23,6 +23,44 @@ function promiseDelay(delay){
 	})
 }
 
+function process(){
+	Promise.resolve()
+	.then(()=>{
+		console.log("Red\n");
+		ledColorSet(0xff,0x00,0x00);   //red	
+	})
+	.then( ()=>promiseDelay(500) )
+	.then(()=>{
+		console.log("Green\n");
+		ledColorSet(0x00,0xff,0x00);   //green
+	})
+	.then( ()=>promiseDelay(500) )
+	.then(()=>{
+		console.log("Blue\n");
+		ledColorSet(0x00,0x00,0xff);   //blue
+	})
+	.then( ()=>promiseDelay(500) )
+	.then(()=>{
+		console.log("Yellow\n");
+		ledColorSet(0xff,0xff,0x00);   //yellow
+	})
+	.then( ()=>promiseDelay(500) )
+	.then(()=>{
+		console.log("Purple\n");
+		ledColorSet(0xff,0x00,0xff);   //purple
+	})
+	.then( ()=>promiseDelay(500) )
+	.then(()=>{
+		console.log("Cyan\n");
+		ledColorSet(0xc0,0xff,0x3e);   //cyan
+	})
+}
+
+function loop(delay){
+	process()
+	setTimeout(()=>loop(delay), delay)
+}
+
 function main(){
 
 	if(wpi.wiringPiSetup() == -1){ //when initialize wiring failed, console.log messageto screen
@@ -48,38 +86,7 @@ function main(){
 	console.log("\n");
 	console.log("\n");
 
-	setInterval(()=>{
-		Promise.resolve()
-		.then(()=>{
-			console.log("Red\n");
-			ledColorSet(0xff,0x00,0x00);   //red	
-		})
-		.then( ()=>promiseDelay(500) )
-		.then(()=>{
-			console.log("Green\n");
-			ledColorSet(0x00,0xff,0x00);   //green
-		})
-		.then( ()=>promiseDelay(500) )
-		.then(()=>{
-			console.log("Blue\n");
-			ledColorSet(0x00,0x00,0xff);   //blue
-		})
-		.then( ()=>promiseDelay(500) )
-		.then(()=>{
-			console.log("Yellow\n");
-			ledColorSet(0xff,0xff,0x00);   //yellow
-		})
-		.then( ()=>promiseDelay(500) )
-		.then(()=>{
-			console.log("Purple\n");
-			ledColorSet(0xff,0x00,0xff);   //purple
-		})
-		.then( ()=>promiseDelay(500) )
-		.then(()=>{
-			console.log("Cyan\n");
-			ledColorSet(0xc0,0xff,0x3e);   //cyan
-		})
-	},500)
+	loop(200)
 
 	return 0;
 }
