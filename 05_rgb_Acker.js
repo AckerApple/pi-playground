@@ -17,7 +17,7 @@ function ledColorSet(r_val, g_val, b_val){
 	wpi.softPwmWrite(LedPinBlue,  b_val);
 }
 
-function ()=>promiseDelay(delay){
+function promiseDelay(delay){
 	return new Promise((res,rej)=>{
 		setTimeout(()=>res(), delay)
 	})
