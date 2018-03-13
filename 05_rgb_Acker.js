@@ -86,7 +86,7 @@ function main(){
 	console.log("\n");
 	console.log("\n");
 
-	loop(200)
+	loop(400)
 
 	return 0;
 }
