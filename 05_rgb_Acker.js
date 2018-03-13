@@ -24,7 +24,7 @@ function promiseDelay(delay){
 }
 
 function process(){
-	Promise.resolve()
+	return Promise.resolve()
 	.then(()=>{
 		console.log("Red\n");
 		ledColorSet(0xff,0x00,0x00);   //red	
@@ -58,7 +58,8 @@ function process(){
 
 function loop(delay){
 	process()
-	setTimeout(()=>loop(delay), delay)
+	.then( ()=>promiseDelay() )
+	.then( ()=>loop(delay) )
 }
 
 function main(){
@@ -86,7 +87,7 @@ function main(){
 	console.log("\n");
 	console.log("\n");
 
-	loop(400)
+	loop(500)
 
 	return 0;
 }
