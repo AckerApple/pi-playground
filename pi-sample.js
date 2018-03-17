@@ -18,8 +18,8 @@ const defaultDriver = {
   softPwmWrite:(pin, freq)=>null
 }
 
-module.exports.pi = function(){
-  return new Pi()
+module.exports.pi = function( driver ){
+  return new Pi( driver )
 }
 
 class Pin{
