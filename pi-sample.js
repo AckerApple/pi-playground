@@ -132,7 +132,7 @@ class OutputPin extends Pin{
 
   on(){
     this.setupOnOff()
-    this.write( this.Pi.LOW )
+    this.write( this.Pi.driver.LOW )
     this.isOn = true
     return this
   }
