@@ -1,5 +1,4 @@
-var pi = require('./pi').pi()
-var wpi = require('wiringpi-node')
+var pi = require('./dynamicPi').pi()
 var open = require("open");
 
 const LedPin    = 0
@@ -24,7 +23,7 @@ function initStandBy(){
   .released(()=>{
 	btnWatch.stop()
 	startApp()
-	console.log('the ack app has begun. Push the button')
+		console.log('the ack app has begun. Push the button')
   })
 
   console.log('Please push your Acker button to begin')

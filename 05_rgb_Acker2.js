@@ -1,5 +1,5 @@
-var pi = require('./pi').pi()
-var wpi = require('wiringpi-node')
+var pi = require('./dynamicPi').pi()
+var wpi = pi.driver
 var OrdinalProcessor = require('./OrdinalProcessor').OrdinalProcessor
 
 const LedPinRed   = 27
