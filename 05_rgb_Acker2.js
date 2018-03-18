@@ -6,9 +6,9 @@ const ledPinRed   = 27
 const ledPinGreen = 28
 const ledPinBlue  = 29
 
-const LedPinRed   = pi.led( ledPinRed )
-const LedPinGreen = pi.led( ledPinGreen )
-const LedPinBlue  = pi.led( ledPinBlue )
+const LedPinRed   = pi.led( ledPinRed ).off()
+const LedPinGreen = pi.led( ledPinGreen ).off()
+const LedPinBlue  = pi.led( ledPinBlue ).off()
 
 function ledColorSet(r_val, g_val, b_val){
 	LedPinRed.softPwmWrite( r_val )

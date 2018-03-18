@@ -17,12 +17,12 @@ function initStandBy(){
 
   const btnWatch = btnPin.watch()
   .pressed(()=>{
-	ledPin.off()
+		ledPin.off()
     console.log('Here  we     go ...')
   })
   .released(()=>{
-	btnWatch.stop()
-	startApp()
+		btnWatch.stop()
+		startApp()
 		console.log('the ack app has begun. Push the button')
   })
 
