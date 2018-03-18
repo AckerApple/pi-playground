@@ -1,9 +1,10 @@
 var pi = require('./dynamicPi').pi()
-var buzzer = pi.buzzer()
 var wpi = pi.driver
 var op = new require('./OrdinalProcessor').op()
 
 const BeepPin = 2
+
+var buzzer = pi.buzzer( BeepPin )
 
 function main(){
 	console.log("\n")
