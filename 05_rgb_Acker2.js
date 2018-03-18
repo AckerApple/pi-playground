@@ -2,20 +2,18 @@ var pi = require('./dynamicPi').pi()
 var wpi = pi.driver
 var OrdinalProcessor = require('./OrdinalProcessor').OrdinalProcessor
 
-const LedPinRed   = 27
-const LedPinGreen = 28
-const LedPinBlue  = 29
+const ledPinRed   = 27
+const ledPinGreen = 28
+const ledPinBlue  = 29
 
-function ledInit(){
-	wpi.softPwmCreate(LedPinRed,  0, 100)
-	wpi.softPwmCreate(LedPinGreen,0, 100)
-	wpi.softPwmCreate(LedPinBlue, 0, 100)
-}
+const LedPinRed   = pi.led( ledPinRed )
+const LedPinGreen = pi.led( ledPinGreen )
+const LedPinBlue  = pi.led( ledPinBlue )
 
 function ledColorSet(r_val, g_val, b_val){
-	wpi.softPwmWrite(LedPinRed,   r_val);
-	wpi.softPwmWrite(LedPinGreen, g_val);
-	wpi.softPwmWrite(LedPinBlue,  b_val);
+	LedPinRed.softPwmWrite( r_val )
+	LedPinGreen.softPwmWrite( g_val )
+	LedPinBlue.softPwmWrite( b_val )
 }
 
 const op = new OrdinalProcessor()
@@ -55,14 +53,6 @@ op.createFeed("colorFeed", function(sets){
 	ledColorSet(sets.r_val, sets.g_val, sets.b_val)
 	return sets
 })
-
-if(wpi.wiringPiSetup() == -1){ //when initialize wiring failed, console.log messageto screen
-	console.log("setup wiringPi failed !");
-	return 1; 
-}
-
-ledInit();
-
 
 op.colorFeed({
 	lighting : true,

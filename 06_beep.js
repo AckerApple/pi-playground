@@ -20,17 +20,18 @@ function main(){
 	console.log("========================================\n")
 	console.log("\n")
 	console.log("\n")
+	
 	op
 	.then(()=>{
 		//beep on
 		console.log("Buzzer on\n")
-		buzzer.on(wpi.LOW);
+		buzzer.on(wpi.LOW)
 	})
 	.delay(100)
 	.then(()=>{
 		console.log("Buzzer off\n")
 		//beep off
-		buzzer.off(wpi.HIGH);		
+		buzzer.off(wpi.HIGH)
 	})
 	.delay(100)
 	.rerun()
