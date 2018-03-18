@@ -3,6 +3,7 @@ const inputs = require('./pi-inputs')
 exports.OutputPin = class OutputPin extends inputs.Pin{
   constructor(num, Pi){
     super(num, Pi)
+console.log('x', this.num, Pi.driver.OUTPUT)
     Pi.driver.pinMode(this.num, Pi.driver.OUTPUT)
   }
   
