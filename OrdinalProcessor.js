@@ -53,12 +53,8 @@ module.exports.OrdinalProcessor = class OrdinalProcessor{
 		return this.add(method, args)		
 	}
 
-	addFeed( method, args ){
-		return this.then(method,args)
-	}
-
 	delay(ms){
-		return this.addFeed(function(v){
+		return this.then(function(v){
 			return new Promise(function(res,rej){
 				setTimeout(()=>res(v), ms)
 			})
@@ -75,14 +71,14 @@ module.exports.OrdinalProcessor = class OrdinalProcessor{
 
 	createFeed(name, method){
 		this[name] = function(){
-			this.addFeed(method, arguments)
+			this.then(method, arguments)
 			return this
 		}.bind(this)
 		return this
 	}
 
 	rerun(){
-		return this.addFeed((v)=>{
+		return this.then((v)=>{
 			this.index = -1
 			return v
 		})

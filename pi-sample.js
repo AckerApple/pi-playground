@@ -1,3 +1,6 @@
+const inputs = require('./pi-inputs')
+const outputs = require('./pi-outputs')
+
 const pins = []
 
 function paramPin(pin){
@@ -21,205 +24,6 @@ const defaultDriver = {
 
 module.exports.pi = function( driver ){
   return new Pi( driver )
-}
-
-class Pin{
-  constructor(num, Pi){
-    this.num = num
-    this.Pi = Pi
-  }
-}
-
-class InputPin extends Pin{
-  constructor(num, Pi){
-    super(num, Pi)
-    Pi.driver.pinMode(num, Pi.driver.INPUT)
-  }
-  
-  //intended to be overridden
-  getState(){
-    return this.Pi.driver.digitalRead(this.num)
-  }
-  
-  setPi(Pi){
-    this.Pi = Pi
-    return this
-  }
-  
-  getPi(){
-    return this.Pi || (this.Pi = new Pi(this.Pi))
-  }
-}
-
-class BtnPin extends InputPin{
-  constructor(num, Pi){
-    super(num, Pi)
-    // Pull up to 3.3V,make GPIO1 a stable level
-    Pi.driver.pullUpDnControl(this.num, Pi.driver.PUD_UP);
-  }
-  
-  watch(){
-    return new BtnWatch(this, this.getPi()).start()
-  }
-}
-
-class BtnWatch{
-  constructor(Btn,Pi){
-    this.pressedProcesses = []
-    this.releasedProcesses = []
-    this.Pi = Pi
-    this.Btn = Btn
-  }
-  
-  start(){
-    this.piCondition = this.Pi.start()
-    .when( ()=>this.Btn.getState(), 1 )
-    .setLastState( this.Btn.getState() )
-    .then(()=>this.press())
-    .onFalse(value=>this.release())
-
-    return this
-  }
-  
-  stop(){
-    this.Pi.killCondition( this.piCondition )
-  }
-  
-  pressed(method){
-    this.pressedProcesses.push(method)
-    return this
-  }
-  
-  released(method){
-    this.releasedProcesses.push(method)
-    return this
-  }
-  
-  press(){
-    this.pressedProcesses.forEach(p=>p())
-  }
-  
-  release(){
-    this.releasedProcesses.forEach(p=>p())
-  }
-}
-
-class OutputPin extends Pin{
-  constructor(num, Pi){
-    super(num, Pi)
-    Pi.driver.pinMode(this.num, Pi.driver.OUTPUT)
-  }
-  
-  setupOnOff(){
-    this.Pi.connect()
-  }
-
-  write(freq){
-    this.Pi.driver.digitalWrite(this.num, freq)
-  }
-
-  pinMode(freq){
-    this.Pi.driver.pinMode(this.num, this.Pi.driver.OUTPUT)//switch to onoff mode incase was pwm
-  }
-  
-  softPwmCreate(lowNum, highNum){
-    this.Pi.driver.softPwmCreate(this.num, lowNum, highNum)
-  }
-
-  softPwmWrite(index){
-    this.Pi.driver.softPwmWrite(this.num, index)
-  }
-
-
-  on(){
-    this.setupOnOff()
-    this.write( this.Pi.driver.LOW )
-    this.isOn = true
-    return this
-  }
-  
-  off(){
-    clearInterval( this.interval )
-    delete this.interval
-    this.updateToOff()
-    return this
-  }
-  
-  updateToOff(){
-    this.pinMode( this.Pi.driver.OUTPUT )
-    this.write( this.Pi.driver.HIGH )
-    this.isOn = false
-  }
-  
-  toggle(){
-    if( this.isOn ){
-      this.off()
-    }else{
-      this.on()
-    }
-  }
-
-  toggleUpdate(){
-    if( this.isOn ){
-      this.updateToOff()
-    }else{
-      this.on()
-    }
-  }
-  
-  blink(interval){
-    interval = interval || 300
-    this.interval = setInterval(()=>{
-      this.toggleUpdate()
-    },interval)
-  }
-
-  blinkExactly(num, delay){
-    return new Promise((res,rej)=>{
-      if(num===0)return res()
-      
-      num = num || 5
-      delay = delay || 200
-      this.toggleUpdate()
-
-      setTimeout(()=>{
-        res( this.blinkExactly(num-1, delay) )
-      },delay)
-    })
-  }
-  
-  breath( pace, gap ){
-    this.Pi.driver.softPwmCreate(this.num, 0, 100)
-    
-    pace = pace || 20
-    gap = gap || 1000
-    let index = 100//off
-    let goingOn = true
-    
-    const runner = ()=>{
-      goingOn ? --index : ++index 
-      this.Pi.driver.softPwmWrite(this.num,index)
-    }
-    
-    const cpu = ()=>{
-      runner()
-      
-      if( index===100 || index===0 ){
-        goingOn = !goingOn
-        
-        if( index===100 ){
-          clearInterval(this.interval)
-          setTimeout(()=>{
-            if( !this.interval )return//was turned off during wait to breath again
-            
-            this.interval = setInterval(cpu,pace)
-          },gap)
-        }
-      }
-    }
-    
-    this.interval = setInterval(cpu,pace)
-  }
 }
 
 class PiCondition{
@@ -318,18 +122,22 @@ class Pi{
   }
 
   outputPin(num){
-    return new OutputPin(num, this)
+    return new outputs.OutputPin(num, this)
+  }
+
+  buzzer(num){
+    return new outputs.Buzzer(num, this)
   }
 
   led(num){
-    return new OutputPin(num, this)
+    return new outputs.OutputPin(num, this)
   }
 
   inputPin(num){
-    return new InputPin(num, this)
+    return new inputs.InputPin(num, this)
   }
 
   btnPin(num){
-    return new BtnPin(num, this)
+    return new inputs.BtnPin(num, this)
   }
 }
