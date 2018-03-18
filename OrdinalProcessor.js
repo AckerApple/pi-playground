@@ -1,9 +1,18 @@
+module.exports.op = function(){
+	return new module.exports.OrdinalProcessor()
+}
+
 module.exports.OrdinalProcessor = class OrdinalProcessor{
 	constructor(){
 		this.started = false
 		this.index = -1
 		this.inProcess = false
 		this.functions = []
+	}
+
+	add( method, args ){
+		this.functions.push({method:method,args:args})
+		return this.process()
 	}
 
 	process( feed ){
@@ -39,14 +48,13 @@ module.exports.OrdinalProcessor = class OrdinalProcessor{
 		return args
 	}
 
-	add( method, args ){
-		this.functions.push({method:method,args:args})
-		return this.process()
+	then( method, args ){
+		method.feed = true
+		return this.add(method, args)		
 	}
 
 	addFeed( method, args ){
-		method.feed = true
-		return this.add(method, args)		
+		return this.then(method,args)
 	}
 
 	delay(ms){

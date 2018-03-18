@@ -13,6 +13,7 @@ const defaultDriver = {
   wiringPiSetup:()=>null,
   pinMode:(pin, type)=>null,
   digitalRead:(pin)=>paramPin(pin).read,
+  digitalWrite:(pin,freq)=>null,
   pullUpDnControl:(pin,state)=>null,
   softPwmCreate:(pin, low, high)=>null,
   softPwmWrite:(pin, freq)=>null
