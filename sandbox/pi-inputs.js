@@ -38,7 +38,7 @@ exports.BtnPin = class BtnPin extends exports.InputPin{
   }
 }
 
-exports.BtnWatch = class BtnWatch{
+class BtnWatch{
   constructor(Btn,Pi){
     this.pressedProcesses = []
     this.releasedProcesses = []
@@ -78,3 +78,6 @@ exports.BtnWatch = class BtnWatch{
     this.releasedProcesses.forEach(p=>p())
   }
 }
+
+
+exports.BtnWatch = BtnWatch
