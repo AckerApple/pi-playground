@@ -1,0 +1,35 @@
+{
+  "name": "pi-server",
+  "version": "0.0.0",
+  "description": "Websocket server connection and webapp for Raspberry Pi",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm-run-all start:server open",
+    "start:watch": "watch \"npm run start\" ./",
+    "start:server": "node index",
+    "open": "opener http://localhost:8080",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ackerapple/pi-server.git"
+  },
+  "keywords": [
+    "raspberry",
+    "pi",
+    "angular",
+    "server"
+  ],
+  "author": "Acker Apple",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ackerapple/pi-server/issues"
+  },
+  "homepage": "https://github.com/ackerapple/pi-server#readme",
+  "dependencies": {
+    "ack-host": "^0.6.1",
+    "npm-run-all": "^4.1.2",
+    "opener": "^1.4.3",
+    "watch": "^1.0.2"
+  }
+}
