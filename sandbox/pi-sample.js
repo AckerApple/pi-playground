@@ -77,6 +77,7 @@ class Pi{
   constructor( driver ){
     this.conditions=[]
     this.driver = driver || defaultDriver
+    this.connect()
   }
   
   //intended to be overridden
@@ -89,10 +90,7 @@ class Pi{
 
   start(){
     if(this.interval)return this
-
-    this.connect()
     this.interval = setInterval(()=>this.process(),0)
-    
     return this
   }
   
