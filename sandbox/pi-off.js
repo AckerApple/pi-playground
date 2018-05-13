@@ -13,5 +13,8 @@ module.exports.observer = rxjs.Observable.create(function(o){
 
 process.once('SIGINT', ()=>{
   observer.next()
-  setTimeout(()=>process.exit(), 100)
+  setTimeout(()=>{
+    console.log(22)
+    process.exit()
+  }, 200)
 })
