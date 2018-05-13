@@ -37,13 +37,15 @@ exports.OutputPin = class OutputPin extends inputs.Pin{
     this.Pi.driver.softPwmWrite(this.num, index)
   }
 
+  //open circuit
   on(){
     this.setupOnOff()
     this.Pi.driver.digitalWrite(this.num, this.Pi.driver.LOW)
     this.isOn = true
     return this
   }
-  
+
+  //closed circuit
   off(){
     clearInterval( this.interval )
     delete this.interval

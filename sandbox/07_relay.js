@@ -3,6 +3,7 @@ var wpi = pi.driver
 var op = new require('./OrdinalProcessor').op()
 
 const RelayPin = 0
+const LedPin = 1
 
 function main(){
   /*
@@ -13,6 +14,7 @@ function main(){
   */
   
   const relay = pi.relay(RelayPin);   //set GPIO0 output
+  const led = pi.led(LedPin);   //set GPIO0 output
   
   console.log("\n");
   console.log("\n");
@@ -33,13 +35,17 @@ function main(){
   op.then(()=>{
     // Tick
     console.log("......Relay Close\n");
-    relay.on(RelayPin, wpi.LOW);
+    relay.on();
+    console.log("......LED On\n");
+    led.on();
   })
   .delay(1000)
   .then(()=>{
     // Tock
     console.log("Relay Open......\n");
-    relay.off(RelayPin, wpi.HIGH);
+    relay.off();
+    console.log("LED OFF......\n");
+    led.off();
   })
   .delay(1000)
   .rerun()
