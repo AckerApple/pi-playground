@@ -118,4 +118,5 @@ exports.OutputPin = class OutputPin extends inputs.Pin{
   }
 }
 
-exports.Buzzer = class Buzzer extends exports.OutputPin{}
+//exports.Buzzer = class Buzzer extends exports.OutputPin{}
+//exports.Relay = class Relay extends exports.OutputPin{}

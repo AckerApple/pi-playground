@@ -12,7 +12,7 @@ function main(){
   }
   */
   
-  wpi.pinMode(RelayPin, wpi.OUTPUT);   //set GPIO0 output
+  const relay = pi.relay(RelayPin);   //set GPIO0 output
   
   console.log("\n");
   console.log("\n");
@@ -33,13 +33,13 @@ function main(){
   op.then(()=>{
     // Tick
     console.log("......Relay Close\n");
-    wpi.digitalWrite(RelayPin, wpi.LOW);
+    relay.on(RelayPin, wpi.LOW);
   })
   .delay(1000)
   .then(()=>{
     // Tock
     console.log("Relay Open......\n");
-    wpi.digitalWrite(RelayPin, wpi.HIGH);
+    relay.off(RelayPin, wpi.HIGH);
   })
   .delay(1000)
   .rerun()

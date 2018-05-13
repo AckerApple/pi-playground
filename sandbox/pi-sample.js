@@ -124,7 +124,11 @@ class Pi{
   }
 
   buzzer(num){
-    return new outputs.Buzzer(num, this)
+    return new outputs.OutputPin(num, this)
+  }
+
+  relay(num){
+    return new outputs.OutputPin(num, this)
   }
 
   led(num){
