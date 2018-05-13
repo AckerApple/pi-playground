@@ -7,7 +7,7 @@ exports.OutputPin = class OutputPin extends inputs.Pin{
     Pi.driver.pinMode(this.num, Pi.driver.OUTPUT)
 
     this.offSubscription = offObserver.subscribe(()=>{
-      this.off()
+      this.on()
       this.destroy()
       console.log('off')
     })
