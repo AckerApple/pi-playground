@@ -6,12 +6,11 @@ exports.OutputPin = class OutputPin extends inputs.Pin{
 //console.log('x', this.num, Pi.driver.OUTPUT)
     Pi.driver.pinMode(this.num, Pi.driver.OUTPUT)
 
-    process.once('SIGINT',()=>{
+process.on('exit', ()=>this.off())
+    process.once('beforeExit', ()=>{
+      console.log(22)
       this.off()
-      //process.exit()
-      return true
     })
-
   }
   
   setupOnOff(){
