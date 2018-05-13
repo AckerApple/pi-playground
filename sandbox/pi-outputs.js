@@ -5,6 +5,12 @@ exports.OutputPin = class OutputPin extends inputs.Pin{
     super(num, Pi)
 //console.log('x', this.num, Pi.driver.OUTPUT)
     Pi.driver.pinMode(this.num, Pi.driver.OUTPUT)
+
+    process.once('SIGINT',()=>{
+      this.off()
+      //process.exit()
+    })
+
   }
   
   setupOnOff(){
