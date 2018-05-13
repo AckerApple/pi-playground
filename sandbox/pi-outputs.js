@@ -129,8 +129,13 @@ exports.OutputPin = class OutputPin extends inputs.Pin{
 }
 
 exports.Led = class Led extends exports.OutputPin{
-  off = high
-  on = low
+  off(){
+    return this.high()
+  }
+
+  on(){
+    return this.low()
+  }
 
   destroy(){
     super.destroy()
@@ -142,8 +147,21 @@ exports.Buzzer = class Buzzer extends exports.Led{
 }
 
 exports.Relay = class Relay extends exports.OutputPin{
-  close = high
-  open = low
+  off(){
+    return this.low()
+  }
+
+  on(){
+    return this.high()
+  }
+
+  close(){
+    return this.high()
+  }
+
+  open(){
+    return this.low()
+  }
 
   destroy(){
     super.destroy()
