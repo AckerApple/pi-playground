@@ -9,6 +9,7 @@ exports.OutputPin = class OutputPin extends inputs.Pin{
     process.once('SIGINT',()=>{
       this.off()
       //process.exit()
+      return true
     })
 
   }
