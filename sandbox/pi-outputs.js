@@ -165,6 +165,6 @@ exports.Relay = class Relay extends exports.OutputPin{
 
   destroy(){
     super.destroy()
-    this.open()
+    this.off()
   }
 }
