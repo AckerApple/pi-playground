@@ -148,23 +148,23 @@ exports.Buzzer = class Buzzer extends exports.Led{
 
 exports.Relay = class Relay extends exports.OutputPin{
   off(){
-    return this.low()
+    return this.high()
   }
 
   on(){
-    return this.high()
+    return this.low()
   }
 
   close(){
-    return this.high()
+    return this.low()
   }
 
   open(){
-    return this.low()
+    return this.high()
   }
 
   destroy(){
     super.destroy()
-    this.off()
+    this.open()
   }
 }
