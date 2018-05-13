@@ -13,8 +13,8 @@ function main(){
   }
   */
   
-  const relay = pi.relay(RelayPin);   //set GPIO0 output
   const led = pi.led(LedPin);   //set GPIO0 output
+  const relay = pi.relay(RelayPin);   //set GPIO0 output
   
   console.log("\n");
   console.log("\n");
@@ -37,7 +37,7 @@ function main(){
     console.log("......Relay Close\n");
     relay.on();
     console.log("......LED On\n");
-    led.on();
+    //led.on();
   })
   .delay(1000)
   .then(()=>{
@@ -45,7 +45,7 @@ function main(){
     console.log("Relay Open......\n");
     relay.off();
     console.log("LED OFF......\n");
-    led.off();
+    //led.off();
   })
   .delay(1000)
   .rerun()

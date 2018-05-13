@@ -10,7 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "open": "0.0.5",
-    "rxjs": "^6.1.0",
     "wiring-pi": "^2.2.1",
     "wiringpi-node": "^2.4.4"
   },

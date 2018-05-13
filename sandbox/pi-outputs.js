@@ -1,19 +1,18 @@
 const inputs = require('./pi-inputs')
-const offObserver = require('./pi-off').observer
+const offObserver = require('./pi-off').emitter
 
 exports.OutputPin = class OutputPin extends inputs.Pin{
   constructor(num, Pi){
     super(num, Pi)
     Pi.driver.pinMode(this.num, Pi.driver.OUTPUT)
 
-    this.offSubscription = offObserver.subscribe(()=>{
+
+    offObserver.once("exit",()=>{
       this.destroy()
     })
   }
 
-  destroy(){
-    this.offSubscription.unsubscribe()
-  }
+  destroy(){}
   
   setupOnOff(){
     this.Pi.connect()
@@ -148,23 +147,23 @@ exports.Buzzer = class Buzzer extends exports.Led{
 
 exports.Relay = class Relay extends exports.OutputPin{
   off(){
-    return this.high()
+    return this.low()
   }
 
   on(){
-    return this.low()
+    return this.high()
   }
 
   close(){
-    return this.low()
+    return this.high()
   }
 
   open(){
-    return this.high()
+    return this.low()
   }
 
   destroy(){
     super.destroy()
-    this.open()
+    this.off()
   }
 }

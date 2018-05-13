@@ -4,14 +4,12 @@ All Outputs use this file to turn off when app over.
 Prevents light from staying on
 */
 
-const rxjs = require('rxjs')
-let observer
+const events = require('events')
+const emitter = new events()
 
-module.exports.observer = rxjs.Observable.create(function(o){
-  observer = o
-})
+module.exports.emitter = emitter
 
 process.once('SIGINT', ()=>{
-  observer.next()
+  emitter.emit('exit')
   process.exit()
 })
