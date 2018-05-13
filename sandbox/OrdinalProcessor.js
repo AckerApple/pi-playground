@@ -4,10 +4,28 @@ module.exports.op = function(){
 
 module.exports.OrdinalProcessor = class OrdinalProcessor{
 	constructor(){
-		this.started = false
+		this.stopped = false//paused, not running
+		this.started = false//ever started
 		this.index = -1
 		this.inProcess = false
 		this.functions = []
+	}
+
+	run(){
+		this.stopped = false
+		return this.process()
+	}
+
+	stop(){
+		this.stopped = true
+		return this
+	}
+
+	rerun(){
+		return this.then((v)=>{
+			this.index = -1
+			return v
+		})
 	}
 
 	add( method, args ){
@@ -16,7 +34,9 @@ module.exports.OrdinalProcessor = class OrdinalProcessor{
 	}
 
 	process( feed ){
-		if(this.inProcess===true)return this//already in process
+		if(this.stopped===true || this.inProcess===true){
+			return this
+		}
 
 		++this.index
 		const definition = this.functions[ this.index ]//.unshift()
@@ -75,12 +95,5 @@ module.exports.OrdinalProcessor = class OrdinalProcessor{
 			return this
 		}.bind(this)
 		return this
-	}
-
-	rerun(){
-		return this.then((v)=>{
-			this.index = -1
-			return v
-		})
 	}
 }

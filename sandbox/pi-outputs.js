@@ -1,16 +1,19 @@
 const inputs = require('./pi-inputs')
+const offObserver = require('./pi-off').observer
 
 exports.OutputPin = class OutputPin extends inputs.Pin{
   constructor(num, Pi){
     super(num, Pi)
-//console.log('x', this.num, Pi.driver.OUTPUT)
     Pi.driver.pinMode(this.num, Pi.driver.OUTPUT)
 
-process.on('exit', ()=>this.off())
-    process.once('beforeExit', ()=>{
-      console.log(22)
+    this.offSubscription = offObserver.subscribe(()=>{
       this.off()
+      this.destroy()
     })
+  }
+
+  destroy(){
+    this.offSubscription.unsubscribe()
   }
   
   setupOnOff(){
