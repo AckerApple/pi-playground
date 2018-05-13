@@ -3,7 +3,7 @@ const inputs = require('./pi-inputs')
 exports.OutputPin = class OutputPin extends inputs.Pin{
   constructor(num, Pi){
     super(num, Pi)
-console.log('x', this.num, Pi.driver.OUTPUT)
+//console.log('x', this.num, Pi.driver.OUTPUT)
     Pi.driver.pinMode(this.num, Pi.driver.OUTPUT)
   }
   
@@ -26,7 +26,6 @@ console.log('x', this.num, Pi.driver.OUTPUT)
   softPwmWrite(index){
     this.Pi.driver.softPwmWrite(this.num, index)
   }
-
 
   on(){
     this.setupOnOff()
