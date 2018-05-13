@@ -9,6 +9,7 @@ exports.OutputPin = class OutputPin extends inputs.Pin{
     this.offSubscription = offObserver.subscribe(()=>{
       this.off()
       this.destroy()
+      console.log('off')
     })
   }
 
