@@ -7,9 +7,7 @@ exports.OutputPin = class OutputPin extends inputs.Pin{
     Pi.driver.pinMode(this.num, Pi.driver.OUTPUT)
 
     this.offSubscription = offObserver.subscribe(()=>{
-      this.on()
       this.destroy()
-      console.log('off')
     })
   }
 
@@ -37,16 +35,16 @@ exports.OutputPin = class OutputPin extends inputs.Pin{
     this.Pi.driver.softPwmWrite(this.num, index)
   }
 
-  //open circuit
-  on(){
+  //led on, open relay
+  low(){
     this.setupOnOff()
     this.Pi.driver.digitalWrite(this.num, this.Pi.driver.LOW)
     this.isOn = true
     return this
   }
 
-  //closed circuit
-  off(){
+  //led off, closed relay
+  high(){
     clearInterval( this.interval )
     delete this.interval
     this.updateToOff()
@@ -130,5 +128,25 @@ exports.OutputPin = class OutputPin extends inputs.Pin{
   }
 }
 
-//exports.Buzzer = class Buzzer extends exports.OutputPin{}
-//exports.Relay = class Relay extends exports.OutputPin{}
+exports.Led = class Led extends exports.OutputPin{
+  off = high
+  on = low
+
+  destroy(){
+    super.destroy()
+    this.off()
+  }
+}
+
+exports.Buzzer = class Buzzer extends exports.Led{
+}
+
+exports.Relay = class Relay extends exports.OutputPin{
+  close = high
+  open = low
+
+  destroy(){
+    super.destroy()
+    this.open()
+  }
+}

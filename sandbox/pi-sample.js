@@ -124,15 +124,15 @@ class Pi{
   }
 
   buzzer(num){
-    return new outputs.OutputPin(num, this)
+    return new outputs.Buzzer(num, this)
   }
 
   relay(num){
-    return new outputs.OutputPin(num, this)
+    return new outputs.Relay(num, this)
   }
 
   led(num){
-    return new outputs.OutputPin(num, this)
+    return new outputs.Led(num, this)
   }
 
   inputPin(num){
