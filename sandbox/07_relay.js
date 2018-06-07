@@ -49,8 +49,6 @@ function main(){
   })
   .delay(1000)
   .rerun()
-  
-  return 0
 }
 
 main()
