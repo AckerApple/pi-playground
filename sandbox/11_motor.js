@@ -14,9 +14,9 @@ function main(){
 	}
 	*/
 	
-	wpi.pinMode(MotorPin1, wpi.OUTPUT);
-	wpi.pinMode(MotorPin2, wpi.OUTPUT);
-	wpi.pinMode(MotorEnable, wpi.OUTPUT);
+	const mp1 = pi.outputPin(MotorPin1);
+	const mp2 = pi.outputPin(MotorPin2);
+	const mpOn = pi.outputPin(MotorEnable);
 
 	console.log("\n");
 	console.log("\n");
@@ -37,26 +37,26 @@ function main(){
 	op
 	.then(()=>{
 		console.log("Clockwise\n");
-		wpi.digitalWrite(MotorEnable, wpi.HIGH);
-		wpi.digitalWrite(MotorPin1, wpi.HIGH);
-		wpi.digitalWrite(MotorPin2, wpi.LOW);
+		mpOn.high();
+		mp1.high();
+		mp2.low();
 	})
 	.delay(3000)
 	.then(()=>{
 		console.log("Stop\n");
-		wpi.digitalWrite(MotorEnable, wpi.LOW);
+		mpOn.low();
 	})
 	.delay(3000)
 	.then(()=>{
 		console.log("Anti-clockwise\n");
-		wpi.digitalWrite(MotorEnable, wpi.HIGH);
-		wpi.digitalWrite(MotorPin1, wpi.LOW);
-		wpi.digitalWrite(MotorPin2, wpi.HIGH);
+		mpOn.high();
+		mp1.low();
+		mp2.high();
 	})
 	.delay(3000)
 	.then(()=>{
 		console.log("Stop\n");
-		wpi.digitalWrite(MotorEnable, wpi.LOW);
+		mpOn.low();
 	})
 	.delay(3000)
 	.rerun()

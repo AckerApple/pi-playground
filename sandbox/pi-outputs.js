@@ -18,9 +18,9 @@ exports.OutputPin = class OutputPin extends inputs.Pin{
     this.Pi.connect()
   }
 
-  write(freq){
+  /*write(freq){
     
-  }
+  }*/
 
   pinMode(freq){
     this.Pi.driver.pinMode(this.num, this.Pi.driver.OUTPUT)//switch to onoff mode incase was pwm
