@@ -127,7 +127,7 @@ exports.OutputPin = class OutputPin extends inputs.Pin{
   }
 }
 
-exports.Led = class Led extends exports.OutputPin{
+exports.Power = class Power extends exports.OutputPin{
   off(){
     return this.high()
   }
@@ -142,8 +142,8 @@ exports.Led = class Led extends exports.OutputPin{
   }
 }
 
-exports.Buzzer = class Buzzer extends exports.Led{
-}
+exports.Led = class Led extends exports.Power{}
+exports.Buzzer = class Buzzer extends exports.Power{}
 
 exports.Relay = class Relay extends exports.OutputPin{
   off(){

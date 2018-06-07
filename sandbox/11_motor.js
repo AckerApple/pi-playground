@@ -14,8 +14,8 @@ function main(){
 	}
 	*/
 	
-	const mp1 = pi.outputPin(MotorPin1);
-	const mp2 = pi.outputPin(MotorPin2);
+	const mp1 = pi.power(MotorPin1);
+	const mp2 = pi.power(MotorPin2);
 	const mpOn = pi.outputPin(MotorEnable);
 
 	console.log("\n");
@@ -38,8 +38,8 @@ function main(){
 	.then(()=>{
 		console.log("Clockwise\n");
 		mpOn.high();
-		mp1.high();
-		mp2.low();
+		mp1.off();
+		mp2.on();
 	})
 	.delay(3000)
 	.then(()=>{
@@ -50,8 +50,8 @@ function main(){
 	.then(()=>{
 		console.log("Anti-clockwise\n");
 		mpOn.high();
-		mp1.low();
-		mp2.high();
+		mp1.on();
+		mp2.off();
 	})
 	.delay(3000)
 	.then(()=>{

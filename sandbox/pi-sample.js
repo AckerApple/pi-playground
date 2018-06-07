@@ -131,6 +131,10 @@ class Pi{
     return new outputs.Relay(num, this)
   }
 
+  power(num){
+    return new outputs.Power(num, this)
+  }
+
   led(num){
     return new outputs.Led(num, this)
   }
