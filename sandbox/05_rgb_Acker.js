@@ -1,4 +1,4 @@
-var pi = require('./pi').pi()
+var pi = require('ack-pi').pi( require('os').platform()==='linux' )
 var wpi = require('wiringpi-node')
 
 const LedPinRed   = 27

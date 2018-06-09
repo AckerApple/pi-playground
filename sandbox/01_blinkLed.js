@@ -8,7 +8,7 @@
 **********************************************************************/
 
 //var wpi = require('wiring-pi');
-var wpi = require('wiringpi-node')
+var pi = require('ack-pi').pi( require('os').platform()==='linux' )
 
 
 const LedPin = 0
@@ -16,12 +16,12 @@ const LedPin = 0
 function main(){
   let isOn = false
 	// When initialize wiring failed, print messageto screen
-	if(wpi.wiringPiSetup() == -1){
+	/*if(wpi.wiringPiSetup() == -1){
 		console.log("setup wiringPi failed !");
 		return 1; 
-	}
+	}*/
 	
-	wpi.pinMode(LedPin, wpi.OUTPUT);
+	const led = pi.led( LedPin );
 
 	console.log("\n");
 	console.log("\n");
@@ -40,12 +40,12 @@ function main(){
 	setInterval(()=>{
 		if( isOn=!isOn ){
 			// LED on
-			wpi.digitalWrite(LedPin, wpi.LOW);
-			console.log("...LED on\n");
+			led.low()
+			console.log("...LED on\n")
 		}else{
 			// LED off
-			wpi.digitalWrite(LedPin, wpi.HIGH);
-			console.log("LED off...\n");
+			led.high()
+			console.log("LED off...\n")
 		}
 	},100)
 

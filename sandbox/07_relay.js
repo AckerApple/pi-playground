@@ -1,6 +1,6 @@
-var pi = require('./dynamicPi').pi()
+var pi = require('ack-pi').pi( require('os').platform()==='linux' )
 var wpi = pi.driver
-var op = new require('./OrdinalProcessor').op()
+var op = new require('ack-pi/dist/OrdinalProcessor').op()
 
 const RelayPin = 0
 const LedPin = 1

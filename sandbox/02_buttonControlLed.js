@@ -1,5 +1,5 @@
-var pi = require('./dynamicPi').pi()
-var open = require("open");
+var pi = require('ack-pi').pi( require('os').platform()==='linux' )
+var open = require("open")
 
 const LedPin    = 0
 const ButtonPin = 1

@@ -1,6 +1,6 @@
-var pi = require('./dynamicPi').pi()
+var pi = require('ack-pi').pi( require('os').platform()==='linux' )
 var wpi = pi.driver
-var OrdinalProcessor = require('./OrdinalProcessor').OrdinalProcessor
+var OrdinalProcessor = require('ack-pi/dist/OrdinalProcessor').OrdinalProcessor
 
 const ledPinRed   = 27
 const ledPinGreen = 28

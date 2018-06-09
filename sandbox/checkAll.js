@@ -1,4 +1,4 @@
-var pi = require('./dynamicPi').pi()
+var pi = require('ack-pi').pi( require('os').platform()==='linux' )
 var open = require("open");
 
 let pin=0
